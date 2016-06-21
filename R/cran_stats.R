@@ -8,9 +8,16 @@
 ##' @export
 ##' @author Guangchuang Yu
 cran_stats <- function(packages) {
-    res <- lapply(packages, cran_stats2)
+    package_stats(packages, cran_stats2)
+}
+
+##' @importFrom magrittr %<>%
+package_stats <- function(packages, .fun) {
+    res <- lapply(packages, .fun)
     res <- do.call('rbind', res)
     res$package <- factor(res$package, levels=packages)
+    res$start %<>% as.Date
+    res$end %<>% as.Date
     return(res)
 }
 

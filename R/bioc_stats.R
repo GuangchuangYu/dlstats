@@ -7,10 +7,7 @@
 ##' @export
 ##' @author Guangchuang Yu
 bioc_stats <- function(packages) {
-    res <- lapply(packages, bioc_stats2)
-    res <- do.call('rbind', res)
-    res$package <- factor(res$package, levels=packages)
-    return(res)
+    package_stats(packages, bioc_stats2)
 }
 
 ##' @importFrom utils read.table

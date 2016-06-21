@@ -3,5 +3,6 @@
 export(bioc_stats)
 export(cran_stats)
 importFrom(jsonlite,fromJSON)
+importFrom(magrittr,"%<>%")
 importFrom(magrittr,"%>%")
 importFrom(utils,read.table)
