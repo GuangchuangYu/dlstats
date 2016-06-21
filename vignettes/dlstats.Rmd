@@ -1,0 +1,68 @@
+---
+title: "dlstats: Download stats of R packages"
+author: "\\
+
+	Guangchuang Yu (<guangchuangyu@gmail.com>)\\
+
+        School of Public Health, The University of Hong Kong"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+  pdf_document:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{00 dlstats introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+  %\VignetteDepends{tidyr}
+  %\VignetteDepends{ggplot2}  
+---
+
+```{r style, echo=FALSE, results="asis", message=FALSE}
+knitr::opts_chunk$set(tidy = FALSE,
+		   message = FALSE)
+```
+
+
+```{r echo=FALSE, results="hide", message=FALSE}
+library("tidyr")
+library("ggplot2")
+library("dlstats")
+```
+
+# Download stats of CRAN packages
+
+```{r fig.width=10}
+library("ggplot2")
+library("dlstats")
+
+x <- cran_stats(c("emojifont", "rvcheck"))
+head(x)
+ggplot(x, aes(end, downloads, group=package, color=package)) +
+    geom_line() + geom_label(aes(label=downloads))
+```
+
+
+# Download stats of Bioconductor packages
+
+```{r fig.width=10}
+pkgs <- c("ChIPseeker", "clusterProfiler", "DOSE", "ggtree", "GOSemSim", "ReactomePA")
+y <- bioc_stats(pkgs)
+head(y)
+
+ggplot(y, aes(end, Nb_of_downloads, group=package, color=package)) +
+    geom_line() + geom_point(aes(shape=package))
+
+```
+
+```{r fig.width=10}
+library("tidyr")
+yy <- gather(y, type, Nb, Nb_of_distinct_IPs:Nb_of_downloads)
+
+ggplot(yy, aes(end, Nb, shape=package, color=package)) +geom_point() + geom_line() +
+    ylab(NULL) + xlab(NULL) + facet_grid(type~., scales="free_y") +
+    ggtitle("Number of downloads per Month") +
+    scale_x_date(date_breaks="1 year", date_labels = "%Y")
+```	
+	

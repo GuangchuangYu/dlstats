@@ -1,0 +1,27 @@
+Package: dlstats
+Title: Download stats of R packages
+Version: 0.0.1
+Authors@R: c(person(given = "Guangchuang", family = "Yu",
+	   	    email = "guangchuangyu@gmail.com",
+		    role  = c("aut", "cre"))
+	    )
+Maintainer: Guangchuang Yu <guangchuangyu@gmail.com>
+Description: Monthly download stats of R packages (both in 'CRAN' or 'Bioconductor').
+Depends:
+    R (>= 3.3.0)
+Imports:
+    jsonlite,
+    magrittr,
+    utils
+Suggests:
+    ggplot2,
+    knitr,
+    tidyr
+License: Artistic-2.0
+VignetteBuilder: knitr
+ByteCompile: true
+Encoding: UTF-8
+LazyData: true
+URL: https://github.com/GuangchuangYu/dlstats
+BugReports: https://github.com/GuangchuangYu/dlstats/issues
+RoxygenNote: 5.0.1
