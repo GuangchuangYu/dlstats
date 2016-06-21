@@ -90,3 +90,14 @@ get_start_year2 <- function(pkg) {
 	}
 	return(right)    
 }
+
+
+
+parseJSON <- function(x) {
+	xx <- unlist(strsplit(x, ',')) %>% strsplit(., ':') %>% do.call('cbind', .)
+	yy <- apply(xx, 2, function(x) gsub("^[^0-9A-Za-z]+([0-9A-Za-z\\-]+)[^0-9A-Za-z]+$", '\\1', x))
+
+	colnames(yy) = yy[1,]
+	yy <- yy[-1,]
+	return(yy)
+}
