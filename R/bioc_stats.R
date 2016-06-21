@@ -13,8 +13,8 @@ bioc_stats <- function(packages) {
 ##' @importFrom utils read.table
 bioc_stats2 <- function(pkg) {
     url <- paste0("https://bioconductor.org/packages/stats/bioc/", pkg, "/", pkg, "_stats.tab", collapse='')
-    x <- tryCatch(read.table(url, header=TRUE), error=function(e) NA)
-    if (is.na(x)) {
+    x <- tryCatch(read.table(url, header=TRUE), error=function(e) NULL)
+    if (is.null(x)) {
         warning(paste("--> OMITTED:", pkg, "is not published in Bioconductor..."))
         return(NULL)
     }
