@@ -46,21 +46,21 @@ cran_stats2 <- function(pkg) {
         url <- paste0("http://cranlogs.r-pkg.org/downloads/total/",
                       mstart, ":", mend, "/", pkg)
         
-        return(suppressWarnings(fromJSON(readLines(url))))
+        return(fromJSON(suppressWarnings(readLines(url))))
     })
     res <- do.call('rbind', res)
+    res$downloads <- as.numeric(res$downloads)
     res <- res[res$downloads != 0,]
     return(res)
 }
 
-##' @importFrom jsonlite fromJSON
 get_start_year <- function(pkg) {
     start_year <- 2012
     end_year <- format(Sys.time(), "%Y") %>% as.numeric
     for (year in start_year:end_year) {
         url <- paste0("http://cranlogs.r-pkg.org/downloads/total/",
                       year, "-01-01:", year, "-12-31/", pkg)
-        d <- suppressWarnings(fromJSON(readLines(url)))
+        d <- fromJSON(suppressWarnings(readLines(url)))
         if (d$downloads > 0) {
             return(year)
         }
@@ -72,32 +72,34 @@ get_start_year2 <- function(pkg) {
     left <- 2012
     right <- format(Sys.time(), "%Y") %>% as.numeric 
     m = ceiling((right-left)/2)
-
+    
     while(m > 0) {
         years <- seq(left, right)
     	year = years[m]
-
-	    url <- paste0("http://cranlogs.r-pkg.org/downloads/total/",
+        
+        url <- paste0("http://cranlogs.r-pkg.org/downloads/total/",
                       year, "-01-01:", year, "-12-31/", pkg)
         d <- suppressWarnings(fromJSON(readLines(url)))
-
+        
         if (d$downloads == 0) {
-		    left = year + 1
+            left = year + 1
         } else {
-		    right = year
-	    }
-	    m = right - left			
-	}
-	return(right)    
+            right = year
+        }
+        m = right - left			
+    }
+    return(right)    
 }
 
 
 
 parseJSON <- function(x) {
-	xx <- unlist(strsplit(x, ',')) %>% strsplit(., ':') %>% do.call('cbind', .)
-	yy <- apply(xx, 2, function(x) gsub("^[^0-9A-Za-z]+([0-9A-Za-z\\-]+)[^0-9A-Za-z]+$", '\\1', x))
+    xx <- unlist(strsplit(x, ',')) %>% strsplit(., ':') %>% do.call('cbind', .)
+    yy <- apply(xx, 2, function(x) gsub("^[^0-9A-Za-z]+([0-9A-Za-z\\-]+)[^0-9A-Za-z]+$", '\\1', x))
+    
+    colnames(yy) = yy[1,]
+    yy = as.data.frame(yy, stringsAsFactors=FALSE)
+    yy <- yy[-1,, drop=FALSE]
 
-	colnames(yy) = yy[1,]
-	yy <- yy[-1,]
-	return(yy)
+    return(yy)
 }
