@@ -67,3 +67,26 @@ get_start_year <- function(pkg) {
     }
 }
 
+
+get_start_year2 <- function(pkg) {
+    left <- 2012
+    right <- format(Sys.time(), "%Y") %>% as.numeric 
+    m = ceiling((right-left)/2)
+
+    while(m > 0) {
+        years <- seq(left, right)
+    	year = years[m]
+
+	    url <- paste0("http://cranlogs.r-pkg.org/downloads/total/",
+                      year, "-01-01:", year, "-12-31/", pkg)
+        d <- suppressWarnings(fromJSON(readLines(url)))
+
+        if (d$downloads == 0) {
+		    left = year + 1
+        } else {
+		    right = year
+	    }
+	    m = right - left			
+	}
+	return(right)    
+}
