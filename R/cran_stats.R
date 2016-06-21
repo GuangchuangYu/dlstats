@@ -24,7 +24,11 @@ package_stats <- function(packages, .fun) {
 ##' @importFrom jsonlite fromJSON
 cran_stats2 <- function(pkg) {
     year <- get_start_year(pkg)
-
+    if (is.null(year)) {
+        warning(paste("--> OMITTED:", pkg, "is not published in CRAN..."))
+        return(NULL)
+    }
+        
     start <- as.Date(paste0(year, "-01-01"))
     end <- as.Date(format(Sys.time(), "%Y-%m-%d"))
 

@@ -16,7 +16,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
   %\VignetteDepends{tidyr}
-  %\VignetteDepends{ggplot2}  
+  %\VignetteDepends{ggplot2}
 ---
 
 ```{r style, echo=FALSE, results="asis", message=FALSE}
@@ -37,7 +37,7 @@ library("dlstats")
 library("ggplot2")
 library("dlstats")
 
-x <- cran_stats(c("emojifont", "rvcheck"))
+x <- cran_stats(c("dlstats", "emojifont", "rvcheck"))
 head(x)
 ggplot(x, aes(end, downloads, group=package, color=package)) +
     geom_line() + geom_label(aes(label=downloads))
