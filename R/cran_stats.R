@@ -13,8 +13,7 @@ cran_stats <- function(packages) {
 
 ##' @importFrom magrittr %<>%
 package_stats <- function(packages, .fun) {
-    res <- lapply(packages, .fun)
-    res <- do.call('rbind', res)
+    res <- lapply(packages, .fun) %>% do.call('rbind', .)
     res$package <- factor(res$package, levels=packages)
     res$start %<>% as.Date
     res$end %<>% as.Date
@@ -47,9 +46,9 @@ cran_stats2 <- function(pkg) {
                       mstart, ":", mend, "/", pkg)
         
         return(fromJSON(suppressWarnings(readLines(url))))
-    })
-    res <- do.call('rbind', res)
-    res$downloads <- as.numeric(res$downloads)
+    }) %>% do.call('rbind', .)
+
+    res$downloads %<>% as.numeric
     res <- res[res$downloads != 0,]
     return(res)
 }
@@ -94,9 +93,7 @@ get_start_year2 <- function(pkg) {
 
 ##' not used, use jsonlite::fromJSON instead
 parseJSON <- function(x) {
-    xx <- strsplit(unlist(strsplit(x, ',')), ':')
-    xx <- do.call('cbind', xx)
-    
+    xx <- unlist(strsplit(x, ',')) %>% strsplit(., ':') %>% do.call('cbind', .)
     yy <- apply(xx, 2, function(x) gsub("^[^0-9A-Za-z]+([0-9A-Za-z\\-]+)[^0-9A-Za-z]+$", '\\1', x))
     
     colnames(yy) = yy[1,]
@@ -105,3 +102,6 @@ parseJSON <- function(x) {
 
     return(yy)
 }
+
+
+globalVariables(".")
