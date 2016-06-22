@@ -18,7 +18,7 @@ cran_stats <- function(packages) {
     all_months <- seq(start, end, by = 'month')
     n <- length(all_months)
     
-    stats <- lapply(seq_along(all_months), function(i) {
+    urls <- sapply(seq_along(all_months), function(i) {
         mstart <- all_months[i]
         if (i == n) {
             mend <- end
@@ -26,13 +26,14 @@ cran_stats <- function(packages) {
             mend <- all_months[i+1]-1
         }
         
-        url <- paste0("http://cranlogs.r-pkg.org/downloads/total/",
-                      mstart, ":", mend, "/", pkgs)
-        
-        return(fromJSON(suppressWarnings(readLines(url))))
-    }) %>% do.call('rbind', .)
-    stats <- stats[stats$downloads != 0,]
+        paste0("http://cranlogs.r-pkg.org/downloads/total/",
+               mstart, ":", mend, "/", pkgs)
+    })
+
+    stats <- lapply(urls, function(url) fromJSON(suppressWarnings(readLines(url)))) %>% do.call('rbind', .)
+    
     ## stats$downloads %<>% as.numeric
+    stats <- stats[stats$downloads != 0,]
     setup_stats(stats, packages)
 }
 
