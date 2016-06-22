@@ -7,7 +7,8 @@
 ##' @export
 ##' @author Guangchuang Yu
 bioc_stats <- function(packages) {
-    package_stats(packages, bioc_stats2)
+    stats <- lapply(packages, bioc_stats2) %>% do.call('rbind', .)
+    setup_stats(stats, packages)
 }
 
 ##' @importFrom utils read.table
@@ -15,7 +16,7 @@ bioc_stats2 <- function(pkg) {
     url <- paste0("https://bioconductor.org/packages/stats/bioc/", pkg, "/", pkg, "_stats.tab", collapse='')
     x <- tryCatch(read.table(url, header=TRUE), error=function(e) NULL)
     if (is.null(x)) {
-        warning(paste("--> OMITTED:", pkg, "is not published in Bioconductor..."))
+        ## warning(paste("--> OMITTED:", pkg, "is not published in Bioconductor..."))
         return(NULL)
     }
     
