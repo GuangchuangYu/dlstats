@@ -1,12 +1,14 @@
 Package: dlstats
-Title: Download stats of R packages
-Version: 0.0.2
+Title: Download Stats of R Packages
+Version: 0.0.4
 Authors@R: c(person(given = "Guangchuang", family = "Yu",
 	   	    email = "guangchuangyu@gmail.com",
 		    role  = c("aut", "cre"))
 	    )
 Maintainer: Guangchuang Yu <guangchuangyu@gmail.com>
-Description: Monthly download stats of R packages (both in 'CRAN' or 'Bioconductor').
+Description: Monthly download stats of 'CRAN' and 'Bioconductor' packages.
+	     Download stats of 'CRAN' packages is from the 'RStudio' 'CRAN mirror', see <http://cranlogs.r-pkg.org>.
+	     'Bioconductor' package download stats is at <https://bioconductor.org/packages/stats/>.
 Depends:
     R (>= 3.3.0)
 Imports:

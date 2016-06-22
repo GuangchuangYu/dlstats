@@ -31,6 +31,15 @@ library("ggplot2")
 library("dlstats")
 ```
 
+# Introduction
+
+This `R` package queries download stats of `R` packages.
+
++ For [CRAN](http://cran.r-project.org/) packages, it queries from [RStudio download logs](http://cran-logs.rstudio.com/).
+
++ For [Bioconductor](http://bioconductor.org/) packages, it queries from [Bioconductor download stats](https://bioconductor.org/packages/stats/).
+
+
 # Download stats of CRAN packages
 
 ```{r fig.width=10}

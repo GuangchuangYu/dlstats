@@ -1,7 +1,7 @@
 dlstats: R package download stats
 ---------
 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/dlstats?color=green)](http://cran.r-project.org/package=dlstats)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/dlstats?color=green)](https://cran.r-project.org/package=dlstats)
 ![](http://cranlogs.r-pkg.org/badges/grand-total/dlstats?color=green)
 ![](http://cranlogs.r-pkg.org/badges/dlstats?color=green)
 ![](http://cranlogs.r-pkg.org/badges/last-week/dlstats?color=green)
