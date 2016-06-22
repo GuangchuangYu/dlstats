@@ -94,7 +94,9 @@ get_start_year2 <- function(pkg) {
 
 ##' not used, use jsonlite::fromJSON instead
 parseJSON <- function(x) {
-    xx <- unlist(strsplit(x, ',')) %>% strsplit(., ':') %>% do.call('cbind', .)
+    xx <- strsplit(unlist(strsplit(x, ',')), ':')
+    xx <- do.call('cbind', xx)
+    
     yy <- apply(xx, 2, function(x) gsub("^[^0-9A-Za-z]+([0-9A-Za-z\\-]+)[^0-9A-Za-z]+$", '\\1', x))
     
     colnames(yy) = yy[1,]
