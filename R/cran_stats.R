@@ -7,6 +7,12 @@
 ##' @importFrom jsonlite fromJSON
 ##' @importFrom magrittr %>%
 ##' @export
+##' @examples
+##' \dontrun{
+##' library("dlstats")
+##' x <- cran_stats(c("dlstats", "emojifont", "rvcheck"))
+##' head(x)
+##' }
 ##' @author Guangchuang Yu
 cran_stats <- function(packages) {
     pkgs <- paste(packages, sep = ',', collapse = ',')

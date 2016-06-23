@@ -15,6 +15,14 @@ data.frame
 \description{
 monthly download stats of cran package(s)
 }
+\examples{
+\dontrun{
+library("dlstats")
+pkgs <- c("ChIPseeker", "clusterProfiler", "DOSE", "ggtree", "GOSemSim", "ReactomePA")
+y <- bioc_stats(pkgs)
+head(y)
+}
+}
 \author{
 Guangchuang Yu
 }

@@ -5,6 +5,13 @@
 ##' @param packages packages
 ##' @return data.frame
 ##' @export
+##' @examples
+##' \dontrun{
+##' library("dlstats")
+##' pkgs <- c("ChIPseeker", "clusterProfiler", "DOSE", "ggtree", "GOSemSim", "ReactomePA")
+##' y <- bioc_stats(pkgs)
+##' head(y)
+##' }
 ##' @author Guangchuang Yu
 bioc_stats <- function(packages) {
     stats <- lapply(packages, bioc_stats2) %>% do.call('rbind', .)

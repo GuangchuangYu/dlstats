@@ -15,6 +15,13 @@ data.frame
 \description{
 monthly download stats of cran package(s)
 }
+\examples{
+\dontrun{
+library("dlstats")
+x <- cran_stats(c("dlstats", "emojifont", "rvcheck"))
+head(x)
+}
+}
 \author{
 Guangchuang Yu
 }
