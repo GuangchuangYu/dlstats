@@ -21,7 +21,7 @@ bioc_stats <- function(packages) {
 ##' @importFrom utils read.table
 bioc_stats2 <- function(pkg) {
     url <- paste0("https://bioconductor.org/packages/stats/bioc/", pkg, "/", pkg, "_stats.tab", collapse='')
-    x <- tryCatch(read.table(url, header=TRUE), error=function(e) NULL)
+    x <- tryCatch(read.table(url, header=TRUE, stringsAsFactors = FALSE), error=function(e) NULL)
     if (is.null(x)) {
         ## warning(paste("--> OMITTED:", pkg, "is not published in Bioconductor..."))
         return(NULL)
@@ -29,10 +29,10 @@ bioc_stats2 <- function(pkg) {
     
     x <- x[x$Month != 'all',]
     start <- paste(x$Year, month2num(x$Month), '01', sep='-') %>% as.Date
-    end <- c(start[-1] - 1 , as.Date(format(Sys.time(), "%Y-%m-%d")))
     x$start <- start
-    x$end <- end
+    x <- x[order(x$start),]
     x <- x[x$Nb_of_downloads > 0,]
+    x$end <- c(x$start[-1] - 1 , as.Date(format(Sys.time(), "%Y-%m-%d")))
     x$package <- pkg
     x <- x[, c("start", "end", "Nb_of_distinct_IPs", "Nb_of_downloads", "package")]
     return(x)
