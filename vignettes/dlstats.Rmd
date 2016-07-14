@@ -12,7 +12,7 @@ output:
   pdf_document:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{00 dlstats introduction}
+  %\VignetteIndexEntry{dlstats introduction}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
   %\VignetteDepends{tidyr}
