@@ -14,8 +14,18 @@
 ##' }
 ##' @author Guangchuang Yu
 bioc_stats <- function(packages) {
+    stats_cache <- get_from_cache(packages)
+    packages <- packages[!packages %in% stats_cache$package]
+    
+    if (length(packages) == 0) {
+        return(stats_cache)
+    }
+    
     stats <- lapply(packages, bioc_stats2) %>% do.call('rbind', .)
-    setup_stats(stats, packages)
+    res <- setup_stats(stats, packages)
+    dlstats_cache(res)
+
+    rbind(res, stats_cache)
 }
 
 ##' @importFrom utils read.table

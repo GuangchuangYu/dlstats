@@ -15,6 +15,13 @@
 ##' }
 ##' @author Guangchuang Yu
 cran_stats <- function(packages) {
+    stats_cache <- get_from_cache(packages)
+    packages <- packages[!packages %in% stats_cache$package]
+
+    if (length(packages) == 0) {
+        return(stats_cache)
+    }
+    
     pkgs <- paste(packages, sep = ',', collapse = ',')
     year <- get_start_year(pkgs)
     
@@ -40,7 +47,11 @@ cran_stats <- function(packages) {
     
     ## stats$downloads %<>% as.numeric
     stats <- stats[stats$downloads != 0,]
-    setup_stats(stats, packages)
+    res <- setup_stats(stats, packages)
+    res <- res[order(res$package, res$start),]
+    dlstats_cache(res)
+
+    rbind(res, stats_cache)
 }
 
 

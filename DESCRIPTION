@@ -1,6 +1,6 @@
 Package: dlstats
 Title: Download Stats of R Packages
-Version: 0.0.6
+Version: 0.0.7
 Authors@R: c(person(given = "Guangchuang", family = "Yu",
 	   	    email = "guangchuangyu@gmail.com",
 		    role  = c("aut", "cre"))
