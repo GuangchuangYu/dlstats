@@ -3,7 +3,7 @@ shinyUI(fluidPage(
     
     sidebarLayout(
         sidebarPanel(
-            textInput("bioc_pkg_input", label = h3("BioC packages"), value = "ggtree"),
+            textInput("bioc_pkg_input", label = h3("BioC packages"), value = "ChIPseeker, clusterProfiler, DOSE, ggtree, GOSemSim, ReactomePA"),
             actionButton("bioc_go", "Go!")
         ),
 

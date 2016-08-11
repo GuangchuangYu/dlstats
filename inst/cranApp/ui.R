@@ -3,7 +3,7 @@ shinyUI(fluidPage(
     
     sidebarLayout(
         sidebarPanel(
-            textInput("cran_pkg_input", label = h3("CRAN packages"), value = "dlstats"),
+            textInput("cran_pkg_input", label = h3("CRAN packages"), value = "dlstats, emojifont, rvcheck"),
             actionButton("cran_go", "Go!")
         ),
 

@@ -75,3 +75,18 @@ ggplot(yy, aes(end, Nb, shape=package, color=package)) +geom_point() + geom_line
     scale_x_date(date_breaks="1 year", date_labels = "%Y")
 ```	
 	
+
+# Shiny apps
+
+We also provide shiny app for visualizing download stats of R packages.
+
+User can use `cranApp()` or `biocApp()` for `CRAN` packages and `Bioconductor` packages respectively.
+
+```r
+biocApp()
+```
+
+![](figures/plot.png)
+
+![](figures/data.png)
+
