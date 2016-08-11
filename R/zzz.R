@@ -3,7 +3,8 @@
 }
 
 .initial <- function() {
-    assign(".dlstats", new.env(), envir=.GlobalEnv)
+    pos <- 1
+    assign(".dlstats", new.env(), envir=as.environment(pos))
 }
 
 
