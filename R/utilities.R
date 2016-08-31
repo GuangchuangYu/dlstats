@@ -1,6 +1,6 @@
 get_from_cache <- function(packages) {
     .dlstats <- get(".dlstats", envir=.GlobalEnv)
-    stats <- lapply(packages, function(pkg) tryCatch(get(pkg, envir=.dlstats), error=function(e) NULL))
+    stats <- lapply(packages, function(pkg) tryCatch(get(pkg, envir=.dlstats, inherits=FALSE), error=function(e) NULL))
     names(stats) <- packages
     res <- do.call('rbind', stats[!sapply(stats, is.null)])
     rownames(res) <- NULL
