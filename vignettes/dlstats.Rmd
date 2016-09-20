@@ -6,7 +6,7 @@ author: "\\
 
         School of Public Health, The University of Hong Kong"
 date: "`r Sys.Date()`"
-output: 
+output:
   html_document:
     toc: true
   pdf_document:
@@ -35,9 +35,9 @@ library("dlstats")
 
 This `R` package queries download stats of `R` packages.
 
-+ For [CRAN](http://cran.r-project.org/) packages, it queries from [RStudio download logs](http://cran-logs.rstudio.com/).
++ For [CRAN](https://cran.r-project.org/) packages, it queries from [RStudio download logs](https://cran-logs.rstudio.com/).
 
-+ For [Bioconductor](http://bioconductor.org/) packages, it queries from [Bioconductor download stats](https://bioconductor.org/packages/stats/).
++ For [Bioconductor](https://bioconductor.org/) packages, it queries from [Bioconductor download stats](https://bioconductor.org/packages/stats/).
 
 
 # Download stats of CRAN packages
@@ -73,8 +73,8 @@ ggplot(yy, aes(end, Nb, shape=package, color=package)) +geom_point() + geom_line
     ylab(NULL) + xlab(NULL) + facet_grid(type~., scales="free_y") +
     ggtitle("Number of downloads per Month") +
     scale_x_date(date_breaks="1 year", date_labels = "%Y")
-```	
-	
+```
+
 
 # Shiny apps
 
