@@ -2,9 +2,9 @@ dlstats: R package download stats
 ---------
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/dlstats?color=green)](https://cran.r-project.org/package=dlstats)
-![](http://cranlogs.r-pkg.org/badges/grand-total/dlstats?color=green)
-![](http://cranlogs.r-pkg.org/badges/dlstats?color=green)
-![](http://cranlogs.r-pkg.org/badges/last-week/dlstats?color=green)
+![](https://cranlogs.r-pkg.org/badges/grand-total/dlstats?color=green)
+![](https://cranlogs.r-pkg.org/badges/dlstats?color=green)
+![](https://cranlogs.r-pkg.org/badges/last-week/dlstats?color=green)
 [![gitter](https://img.shields.io/badge/GITTER-join%20chat-green.svg)](https://gitter.im/GuangchuangYu/Bioinformatics)
 
 
