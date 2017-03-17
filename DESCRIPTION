@@ -1,6 +1,6 @@
 Package: dlstats
 Title: Download Stats of R Packages
-Version: 0.0.9
+Version: 0.1.0
 Authors@R: c(person(given = "Guangchuang", family = "Yu",
 	   	    email = "guangchuangyu@gmail.com",
 		    role  = c("aut", "cre"))
@@ -12,11 +12,13 @@ Description: Monthly download stats of 'CRAN' and 'Bioconductor' packages.
 Depends:
     R (>= 3.3.0)
 Imports:
+    ggplot2,
     jsonlite,
     magrittr,
+    RColorBrewer,
+    scales,
     utils
 Suggests:
-    ggplot2,
     knitr,
     tidyr
 License: Artistic-2.0
