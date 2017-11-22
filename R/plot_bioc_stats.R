@@ -1,5 +1,5 @@
-YGC_cran_pkg <- c("badger", "dlstats", "emojifont", "ggimage", "rvcheck", "scatterpie")
-YGC_bioc_pkg <- c("GOSemSim", "DOSE", "clusterProfiler", "ReactomePA", "ChIPseeker", "ggtree", "meshes", "treeio")
+YGC_cran_pkg <- c("badger", "dlstats", "emojifont", "ggimage", "meme","rvcheck", "scatterpie", "shadowtext")
+YGC_bioc_pkg <- c("ChIPseeker", "clusterProfiler", "DOSE", "ggtree", "GOSemSim", "meshes", "ReactomePA", "seqcombo", "treeio")
 
 ##' plot bioconductor download stats
 ##'
@@ -36,7 +36,7 @@ plot_bioc_stats <- function(pkg=YGC_bioc_pkg) {
 	rank[i] = j # paste0("rank: ", j, '/', n)
     }
 
-    cols <- brewer.pal(length(pkg), 'Dark2')
+    cols <- brewer.pal(length(pkg), 'Set1')
 
     p <- plot_dlstats_internal(nb, "Nb_of_distinct_IPs")
 
