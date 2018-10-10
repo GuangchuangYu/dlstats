@@ -4,10 +4,13 @@
 \alias{bioc_stats}
 \title{bioc_stats}
 \usage{
-bioc_stats(packages)
+bioc_stats(packages, use_cache = TRUE)
 }
 \arguments{
 \item{packages}{packages}
+
+\item{use_cache}{logical, should cached data be used? Default: TRUE. If set to FALSE, it will
+re-query download stats and update cache.}
 }
 \value{
 data.frame
@@ -19,11 +22,10 @@ monthly download stats of cran package(s)
 \dontrun{
 library("dlstats")
 pkgs <- c("ChIPseeker", "clusterProfiler", "DOSE", "ggtree", "GOSemSim", "ReactomePA")
-y <- bioc_stats(pkgs)
+y <- bioc_stats(pkgs, use_cache=TRUE)
 head(y)
 }
 }
 \author{
 Guangchuang Yu
 }
-

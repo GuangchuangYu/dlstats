@@ -4,10 +4,13 @@
 \alias{cran_stats}
 \title{cran_stats}
 \usage{
-cran_stats(packages)
+cran_stats(packages, use_cache = TRUE)
 }
 \arguments{
 \item{packages}{packages}
+
+\item{use_cache}{logical, should cached data be used? Default: TRUE. If set to FALSE, it will
+re-query download stats and update cache.}
 }
 \value{
 data.frame
@@ -18,11 +21,10 @@ monthly download stats of cran package(s)
 \examples{
 \dontrun{
 library("dlstats")
-x <- cran_stats(c("dlstats", "emojifont", "rvcheck"))
+x <- cran_stats(c("dlstats", "emojifont", "rvcheck"), use_cache=TRUE)
 head(x)
 }
 }
 \author{
 Guangchuang Yu
 }
-
