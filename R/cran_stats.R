@@ -69,8 +69,9 @@ setup_stats <- function(stats, packages) {
 }
 
 get_start_year <- function(pkg) {
-    start_year <- 2012
+    # start_year <- 2012
     end_year <- format(Sys.time(), "%Y") %>% as.numeric
+    start_year <- end_year - 5
     for (year in start_year:end_year) {
         url <- paste0("https://cranlogs.r-pkg.org/downloads/total/",
                       year, "-01-01:", year, "-12-31/", pkg)

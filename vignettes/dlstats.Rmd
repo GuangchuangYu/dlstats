@@ -35,7 +35,7 @@ library("dlstats")
 
 This `R` package queries download stats of `R` packages.
 
-+ For [CRAN](https://cran.r-project.org/) packages, it queries from [RStudio download logs](http://cran-logs.rstudio.com/).
++ For [CRAN](https://cran.r-project.org/) packages, it queries from [RStudio download logs](https://cran-logs.rstudio.com/).
 
 + For [Bioconductor](https://bioconductor.org/) packages, it queries from [Bioconductor download stats](https://bioconductor.org/packages/stats/).
 
