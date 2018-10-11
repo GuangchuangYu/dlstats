@@ -3,6 +3,8 @@
 ##'
 ##' @title cran_stats
 ##' @param packages packages
+##' @param use_cache logical, should cached data be used? Default: TRUE. If set to FALSE, it will
+##'   re-query download stats and update cache.
 ##' @return data.frame
 ##' @importFrom jsonlite fromJSON
 ##' @importFrom magrittr %>%
@@ -10,14 +12,15 @@
 ##' @examples
 ##' \dontrun{
 ##' library("dlstats")
-##' x <- cran_stats(c("dlstats", "emojifont", "rvcheck"))
+##' x <- cran_stats(c("dlstats", "emojifont", "rvcheck"), use_cache=TRUE)
 ##' head(x)
 ##' }
 ##' @author Guangchuang Yu
-cran_stats <- function(packages) {
+cran_stats <- function(packages, use_cache=TRUE) {
     stats_cache <- get_from_cache(packages)
-    packages <- packages[!packages %in% stats_cache$package]
-
+    if (use_cache) {
+        packages <- packages[!packages %in% stats_cache$package]
+    }
     if (length(packages) == 0) {
         return(stats_cache)
     }
@@ -51,7 +54,8 @@ cran_stats <- function(packages) {
     res <- res[order(res$package, res$start),]
     dlstats_cache(res)
 
-    rbind(res, stats_cache)
+    if (use_cache) return(rbind(res, stats_cache))
+    return(res)
 }
 
 
@@ -60,6 +64,7 @@ setup_stats <- function(stats, packages) {
     stats$package <- factor(stats$package, levels=packages)
     stats$start %<>% as.Date
     stats$end %<>% as.Date
+    rownames(stats) <- NULL
     return(stats)
 }
 
