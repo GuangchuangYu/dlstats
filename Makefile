@@ -20,8 +20,9 @@ install:
 	R CMD INSTALL $(PKGNAME)_$(PKGVERS).tar.gz
 
 check: build
-	cd ..;\
-	R CMD check --as-cran $(PKGNAME)_$(PKGVERS).tar.gz
+	Rscript -e 'devtools::check()'
+	# cd ..;\
+	# R CMD check --as-cran $(PKGNAME)_$(PKGVERS).tar.gz
 
 clean:
 	cd ..;\

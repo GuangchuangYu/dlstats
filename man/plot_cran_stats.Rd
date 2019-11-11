@@ -18,4 +18,3 @@ plot cran download stats
 \author{
 guangchuang yu
 }
-

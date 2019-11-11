@@ -4,11 +4,13 @@ author: "\\
 
 	Guangchuang Yu (<guangchuangyu@gmail.com>)\\
 
-        School of Public Health, The University of Hong Kong"
+        School of Basic Medical Sciences, Southern Medical University"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  prettydoc::html_pretty:
     toc: true
+    theme: cayman
+    highlight: github
   pdf_document:
     toc: true
 vignette: >
@@ -60,18 +62,18 @@ pkgs <- c("ChIPseeker", "clusterProfiler", "DOSE", "ggtree", "GOSemSim", "Reacto
 y <- bioc_stats(pkgs)
 head(y)
 
-ggplot(y, aes(end, Nb_of_downloads, group=package, color=package)) +
-    geom_line() + geom_point(aes(shape=package))
-```
+if (!is.null(y)) {
+   ggplot(y, aes(end, Nb_of_downloads, group=package, color=package)) +
+       geom_line() + geom_point(aes(shape=package))
 
-```{r fig.width=10}
-library("tidyr")
-yy <- gather(y, type, Nb, Nb_of_distinct_IPs:Nb_of_downloads)
+   library("tidyr")
+   yy <- gather(y, type, Nb, Nb_of_distinct_IPs:Nb_of_downloads)
 
-ggplot(yy, aes(end, Nb, shape=package, color=package)) +geom_point() + geom_line() +
-    ylab(NULL) + xlab(NULL) + facet_grid(type~., scales="free_y") +
-    ggtitle("Number of downloads per Month") +
-    scale_x_date(date_breaks="1 year", date_labels = "%Y")
+   ggplot(yy, aes(end, Nb, shape=package, color=package)) +geom_point() + geom_line() +
+       ylab(NULL) + xlab(NULL) + facet_grid(type~., scales="free_y") +
+       ggtitle("Number of downloads per Month") +
+       scale_x_date(date_breaks="1 year", date_labels = "%Y")
+}
 ```
 
 

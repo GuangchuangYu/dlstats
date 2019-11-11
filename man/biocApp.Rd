@@ -12,4 +12,3 @@ run shiny App for BioC packages
 \author{
 Guangchuang Yu
 }
-

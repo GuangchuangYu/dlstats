@@ -5,16 +5,19 @@ dlstats: R package download stats
 ![](https://cranlogs.r-pkg.org/badges/grand-total/dlstats?color=green)
 ![](https://cranlogs.r-pkg.org/badges/dlstats?color=green)
 ![](https://cranlogs.r-pkg.org/badges/last-week/dlstats?color=green)
-[![gitter](https://img.shields.io/badge/GITTER-join%20chat-green.svg)](https://gitter.im/GuangchuangYu/Bioinformatics)
+[![saythanks](https://img.shields.io/badge/say-thanks-ff69b4.svg)](https://saythanks.io/to/GuangchuangYu)
+[![](https://img.shields.io/badge/follow%20me%20on-WeChat-green.svg)](https://guangchuangyu.github.io/blog_images/biobabble.jpg)
 
 
-## Authors ##
+
+## :writing_hand: Authors ##
 
 Guangchuang YU <https://guangchuangyu.github.io>
 
-School of Public Health, The University of Hong Kong 
+School of Basic Medical Sciences, Southern Medical University
 
-## Installation ##
+
+## :arrow_double_down: Installation ##
 
 Get the released version from CRAN:
 
@@ -29,7 +32,7 @@ Or the development version from github:
 devtools::install_github("GuangchuangYu/dlstats")
 ```
 
-## Examples ##
+## :book: Examples ##
 
 ```r
 library(dlstats)

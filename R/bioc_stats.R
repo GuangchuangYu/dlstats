@@ -25,6 +25,9 @@ bioc_stats <- function(packages, use_cache=TRUE) {
     }
 
     stats <- lapply(packages, bioc_stats2) %>% do.call('rbind', .)
+    if (is.null(stats))
+        return(NULL)
+
     res <- setup_stats(stats, packages)
     dlstats_cache(res)
 
@@ -37,7 +40,7 @@ bioc_stats2 <- function(pkg) {
     url <- paste0("https://bioconductor.org/packages/stats/bioc/", pkg, "/", pkg, "_stats.tab", collapse='')
     x <- tryCatch(read.table(url, header=TRUE, stringsAsFactors = FALSE), error=function(e) NULL)
     if (is.null(x)) {
-        ## warning(paste("--> OMITTED:", pkg, "is not published in Bioconductor..."))
+        warning(paste("--> OMITTED:", pkg, "download stats not found or currently not available..."))
         return(NULL)
     }
 

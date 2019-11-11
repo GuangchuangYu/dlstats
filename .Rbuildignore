@@ -3,3 +3,4 @@
 Makefile
 ^.*\.DS_Store
 ^docs$
+README.md

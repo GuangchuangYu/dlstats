@@ -12,4 +12,3 @@ run shiny App for CRAN packages
 \author{
 Guangchuang Yu
 }
-
