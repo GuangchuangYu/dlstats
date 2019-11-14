@@ -37,7 +37,7 @@ library("dlstats")
 
 This `R` package queries download stats of `R` packages.
 
-+ For [CRAN](https://cran.r-project.org/) packages, it queries from [RStudio download logs](https://cran-logs.rstudio.com/).
++ For [CRAN](https://cran.r-project.org/) packages, it queries from RStudio download logs.
 
 + For [Bioconductor](https://bioconductor.org/) packages, it queries from [Bioconductor download stats](https://bioconductor.org/packages/stats/).
 
@@ -49,9 +49,12 @@ library("ggplot2")
 library("dlstats")
 
 x <- cran_stats(c("emojifont", "ggimage", "hexSticker", "rvcheck"))
-head(x)
-ggplot(x, aes(end, downloads, group=package, color=package)) +
-    geom_line() + geom_point(aes(shape=package))
+
+if (!is.null(x)) {
+   head(x)
+   ggplot(x, aes(end, downloads, group=package, color=package)) +
+       geom_line() + geom_point(aes(shape=package))
+}
 ```
 
 
@@ -60,9 +63,9 @@ ggplot(x, aes(end, downloads, group=package, color=package)) +
 ```{r fig.width=10}
 pkgs <- c("ChIPseeker", "clusterProfiler", "DOSE", "ggtree", "GOSemSim", "ReactomePA")
 y <- bioc_stats(pkgs)
-head(y)
 
 if (!is.null(y)) {
+   head(y)
    ggplot(y, aes(end, Nb_of_downloads, group=package, color=package)) +
        geom_line() + geom_point(aes(shape=package))
 

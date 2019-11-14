@@ -84,6 +84,11 @@ plot_cran_stats <- function(pkg=YGC_cran_pkg) {
         warning(paste("--> OMITTED:", pkg, "download stats not found or currently not available..."))
         return(NULL)
     }
+
+    if (is.null(nb)) {
+        warning(paste("--> OMITTED:", pkg, "download stats not found or currently not available..."))
+        return(NULL)
+    }
     p <- plot_dlstats_internal(nb, "downloads")
     p + labs(captions=paste0("access date: ", format(Sys.time(), "%b %Y")),
              title="Monthly download stats") +

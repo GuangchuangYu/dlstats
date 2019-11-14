@@ -27,6 +27,10 @@ cran_stats <- function(packages, use_cache=TRUE) {
 
     pkgs <- paste(packages, sep = ',', collapse = ',')
     year <- get_start_year(pkgs)
+    if (is.null(year)) {
+        warning(paste("--> OMITTED:", pkgs, "download stats not found or currently not available..."))
+        return(NULL)
+    }
 
     start <- as.Date(paste0(year, "-01-01"))
     end <- as.Date(format(Sys.time(), "%Y-%m-%d"))
@@ -46,7 +50,15 @@ cran_stats <- function(packages, use_cache=TRUE) {
                mstart, ":", mend, "/", pkgs)
     })
 
-    stats <- lapply(urls, function(url) fromJSON(suppressWarnings(readLines(url)))) %>% do.call('rbind', .)
+    stats <- lapply(urls, function(url) {
+        tryCatch(fromJSON(suppressWarnings(readLines(url))),
+                 error = function(e) NULL)
+    }) %>% do.call('rbind', .)
+
+    if (is.null(stats)) {
+        warning(paste("--> OMITTED:", pkgs, "download stats not found or currently not available..."))
+        return(NULL)
+    }
 
     ## stats$downloads %<>% as.numeric
     stats <- stats[stats$downloads != 0,]
@@ -75,11 +87,15 @@ get_start_year <- function(pkg) {
     for (year in start_year:end_year) {
         url <- paste0("https://cranlogs.r-pkg.org/downloads/total/",
                       year, "-01-01:", year, "-12-31/", pkg)
-        d <- fromJSON(suppressWarnings(readLines(url)))
+        d <- tryCatch(fromJSON(suppressWarnings(readLines(url))),
+                      error = function(e) NULL)
+        if (is.null(d))
+            next
         if (any(d$downloads > 0)) {
             return(year)
         }
     }
+    return(NULL)
 }
 
 
