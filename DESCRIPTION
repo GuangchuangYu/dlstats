@@ -1,6 +1,6 @@
 Package: dlstats
 Title: Download Stats of R Packages
-Version: 0.1.3
+Version: 0.1.4
 Authors@R: c(person(given = "Guangchuang", family = "Yu",
 	   	     email = "guangchuangyu@gmail.com",
 		    role  = c("aut", "cre"))
@@ -22,6 +22,7 @@ Suggests:
     knitr,
     tidyr,
     DT,
+    rmarkdown,
     prettydoc
 License: Artistic-2.0
 VignetteBuilder: knitr
