@@ -7,6 +7,9 @@ all: docs check clean
 docs:
 	Rscript -e 'roxygen2::roxygenise(".")'
 
+rd:
+	Rscript -e 'library(methods); devtools::document()'
+
 build:
 	cd ..;\
 	R CMD build $(PKGSRC)

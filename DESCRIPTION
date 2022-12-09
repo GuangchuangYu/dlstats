@@ -30,4 +30,4 @@ ByteCompile: true
 Encoding: UTF-8
 URL: https://github.com/GuangchuangYu/dlstats
 BugReports: https://github.com/GuangchuangYu/dlstats/issues
-RoxygenNote: 6.1.1
+RoxygenNote: 7.2.2
