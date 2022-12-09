@@ -80,10 +80,29 @@ setup_stats <- function(stats, packages) {
     return(stats)
 }
 
+##' set query start year for `cran_stats`
+##'
+##'
+##' @title set_cran_start_year
+##' @param year start year
+##' @return NULL
+##' @export
+##' @author Guangchuang Yu
+set_cran_start_year <- function(year) {
+    ## https://github.com/GuangchuangYu/dlstats/issues/4
+    options(dlstats_cran_start_year = year)
+    ## invisible(year)
+}
+
+
 get_start_year <- function(pkg) {
     # start_year <- 2012
     end_year <- format(Sys.time(), "%Y") %>% as.numeric
     start_year <- end_year - 5
+    start_year <- getOption('dlstats_cran_start_year', default = start_year)
+
+
+
     for (year in start_year:end_year) {
         url <- paste0("https://cranlogs.r-pkg.org/downloads/total/",
                       year, "-01-01:", year, "-12-31/", pkg)
