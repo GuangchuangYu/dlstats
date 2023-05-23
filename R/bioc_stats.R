@@ -1,8 +1,9 @@
-##' monthly download stats of cran package(s)
+##' monthly download stats of Bioconductor software package(s)
 ##'
 ##'
 ##' @title bioc_stats
 ##' @param packages packages
+##' @param type one of "Software", "AnnotationData", "ExperimentData", and "Workflow"
 ##' @param use_cache logical, should cached data be used? Default: TRUE. If set to FALSE, it will
 ##'   re-query download stats and update cache.
 ##' @return data.frame
@@ -15,7 +16,7 @@
 ##' head(y)
 ##' }
 ##' @author Guangchuang Yu
-bioc_stats <- function(packages, use_cache=TRUE) {
+bioc_stats <- function(packages, use_cache=TRUE, type = "Software") {
     stats_cache <- get_from_cache(packages)
     if (use_cache) {
         packages <- packages[!packages %in% stats_cache$package]
@@ -24,7 +25,7 @@ bioc_stats <- function(packages, use_cache=TRUE) {
         return(stats_cache)
     }
 
-    stats <- lapply(packages, bioc_stats2) %>% do.call('rbind', .)
+    stats <- lapply(packages, bioc_stats2, type = type) %>% do.call('rbind', .)
     if (is.null(stats))
         return(NULL)
 
@@ -36,8 +37,15 @@ bioc_stats <- function(packages, use_cache=TRUE) {
 }
 
 ##' @importFrom utils read.table
-bioc_stats2 <- function(pkg) {
-    url <- paste0("https://bioconductor.org/packages/stats/bioc/", pkg, "/", pkg, "_stats.tab", collapse='')
+bioc_stats2 <- function(pkg, type = "Software") {
+    type <- match.arg(type, c("Software", "AnnotationData", "ExperimentData", "Workflow"))
+    url <- switch(type,
+                  Software = "https://bioconductor.org/packages/stats/bioc/",
+                  AnnotationData = "https://bioconductor.org/packages/stats/data-annotation/",
+                  ExperimentData = "https://bioconductor.org/packages/stats/data-experiment/",
+                  Workflow = "http://bioconductor.org/packages/stats/workflows/"
+    )
+    url <- paste0(url, pkg, "/", pkg, "_stats.tab", collapse='')
     x <- tryCatch(read.table(url, header=TRUE, stringsAsFactors = FALSE), error=function(e) NULL)
     if (is.null(x)) {
         warning(paste("--> OMITTED:", pkg, "download stats not found or currently not available..."))
