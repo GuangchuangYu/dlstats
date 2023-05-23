@@ -1,4 +1,4 @@
-##' monthly download stats of Bioconductor software package(s)
+##' monthly download stats of Bioconductor package(s)
 ##'
 ##'
 ##' @title bioc_stats
