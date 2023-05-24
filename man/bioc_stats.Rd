@@ -4,19 +4,21 @@
 \alias{bioc_stats}
 \title{bioc_stats}
 \usage{
-bioc_stats(packages, use_cache = TRUE)
+bioc_stats(packages, use_cache = TRUE, type = "Software")
 }
 \arguments{
 \item{packages}{packages}
 
 \item{use_cache}{logical, should cached data be used? Default: TRUE. If set to FALSE, it will
 re-query download stats and update cache.}
+
+\item{type}{one of "Software", "AnnotationData", "ExperimentData", and "Workflow"}
 }
 \value{
 data.frame
 }
 \description{
-monthly download stats of cran package(s)
+monthly download stats of Bioconductor software package(s)
 }
 \examples{
 \dontrun{
