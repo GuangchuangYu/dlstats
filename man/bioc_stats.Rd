@@ -18,7 +18,7 @@ re-query download stats and update cache.}
 data.frame
 }
 \description{
-monthly download stats of Bioconductor software package(s)
+monthly download stats of Bioconductor package(s)
 }
 \examples{
 \dontrun{
