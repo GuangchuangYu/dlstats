@@ -1,7 +1,7 @@
-#' Get monthly download stats of cran package(s)
+#' Get monthly download stats of CRAN package(s)
 #'
 #' @description
-#' Get monthly download stats of cran package(s), up to 500 packages at a time.
+#' Get monthly download stats of CRAN package(s), up to 500 packages at a time.
 #'
 #' @param packages packages
 #' @param use_cache logical, should cached data be used? Default: TRUE. If set to FALSE, it will re-query download stats and update cache.
