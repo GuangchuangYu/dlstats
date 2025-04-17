@@ -2,7 +2,7 @@
 % Please edit documentation in R/cran_stats.R
 \name{cran_stats}
 \alias{cran_stats}
-\title{cran_stats}
+\title{Get monthly download stats of cran package(s)}
 \usage{
 cran_stats(packages, use_cache = TRUE, progress = TRUE)
 }
@@ -17,5 +17,5 @@ cran_stats(packages, use_cache = TRUE, progress = TRUE)
 data.frame
 }
 \description{
-monthly download stats of cran package(s)
+Get monthly download stats of cran package(s), up to 500 packages at a time.
 }

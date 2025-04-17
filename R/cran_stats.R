@@ -1,15 +1,20 @@
-##' monthly download stats of cran package(s)
-##'
-##'
-##' @title cran_stats
-##' @param packages packages
-##' @param use_cache logical, should cached data be used? Default: TRUE. If set to FALSE, it will re-query download stats and update cache.
-##' @param progress logical, should a progress bar be shown? Default: TRUE. When TRUE, a text progress bar will display “fetching data for `year-month`” as each month’s range is fetched.
-##' @return data.frame
-##' @importFrom jsonlite fromJSON
-##' @importFrom magrittr %>%
-##' @export
+#' Get monthly download stats of cran package(s)
+#'
+#' @description
+#' Get monthly download stats of cran package(s), up to 500 packages at a time.
+#'
+#' @param packages packages
+#' @param use_cache logical, should cached data be used? Default: TRUE. If set to FALSE, it will re-query download stats and update cache.
+#' @param progress logical, should a progress bar be shown? Default: TRUE. When TRUE, a text progress bar will display “fetching data for `year-month`” as each month’s range is fetched.
+#' @return data.frame
+#' @importFrom jsonlite fromJSON
+#' @importFrom magrittr %>%
+#' @export
 cran_stats <- function(packages, use_cache=TRUE, progress=TRUE) {
+    if (length(packages) > 500) {
+        stop(paste0("You have requested ", length(packages), " packages. You can only get up to 500 packages at a time."))
+    }
+    
     stats_cache <- get_from_cache(packages)
     if (use_cache) {
         packages <- packages[!packages %in% stats_cache$package]
