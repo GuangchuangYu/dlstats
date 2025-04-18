@@ -1,22 +1,20 @@
-##' monthly download stats of cran package(s)
-##'
-##'
-##' @title cran_stats
-##' @param packages packages
-##' @param use_cache logical, should cached data be used? Default: TRUE. If set to FALSE, it will
-##'   re-query download stats and update cache.
-##' @return data.frame
-##' @importFrom jsonlite fromJSON
-##' @importFrom magrittr %>%
-##' @export
-##' @examples
-##' \dontrun{
-##' library("dlstats")
-##' x <- cran_stats(c("dlstats", "emojifont", "rvcheck"), use_cache=TRUE)
-##' head(x)
-##' }
-##' @author Guangchuang Yu
-cran_stats <- function(packages, use_cache=TRUE) {
+#' Get monthly download stats of CRAN package(s)
+#'
+#' @description
+#' Get monthly download stats of CRAN package(s), up to 500 packages at a time.
+#'
+#' @param packages packages
+#' @param use_cache logical, should cached data be used? Default: TRUE. If set to FALSE, it will re-query download stats and update cache.
+#' @param progress logical, should a progress bar be shown? Default: TRUE. When TRUE, a text progress bar will display “fetching data for `year-month`” as each month’s range is fetched.
+#' @return data.frame
+#' @importFrom jsonlite fromJSON
+#' @importFrom magrittr %>%
+#' @export
+cran_stats <- function(packages, use_cache=TRUE, progress=TRUE) {
+    if (length(packages) > 500) {
+        stop(paste0("You have requested ", length(packages), " packages. You can only get up to 500 packages at a time."))
+    }
+    
     stats_cache <- get_from_cache(packages)
     if (use_cache) {
         packages <- packages[!packages %in% stats_cache$package]
@@ -45,15 +43,44 @@ cran_stats <- function(packages, use_cache=TRUE) {
         } else {
             mend <- all_months[i+1]-1
         }
-
         paste0("https://cranlogs.r-pkg.org/downloads/total/",
                mstart, ":", mend, "/", pkgs)
     })
 
-    stats <- lapply(urls, function(url) {
-        tryCatch(fromJSON(suppressWarnings(readLines(url))),
-                 error = function(e) NULL)
+    if (progress) {
+        pb <- txtProgressBar(min = 0, max = n, style = 3)
+        cat("\r\033[K") # clear the initial bar line
+    }
+    stats <- lapply(seq_along(urls), function(i) {
+        mstart <- all_months[i]
+        if (i == n) {
+            mend <- end
+        } else {
+            mend <- all_months[i+1] - 1
+        }
+
+        if (progress) {
+            # clear previous message+bar on iterations >1
+            if (i > 1) {
+                cat("\033[1A\r\033[K")  # clear old bar line
+                cat("\033[1A\r\033[K")  # clear old message line
+            }
+            # update message with current month
+            cat(sprintf("dlstats: fetching data for %s\n", format(mstart, "%Y-%m")))
+            # render progress bar
+            setTxtProgressBar(pb, i)
+            cat("\n")
+        }
+
+        result <- tryCatch(
+            fromJSON(suppressWarnings(readLines(urls[i]))),
+            error = function(e) NULL
+        )
+        result
     }) %>% do.call('rbind', .)
+    if (progress) {
+        close(pb)
+    }
 
     if (is.null(stats)) {
         warning(paste("--> OMITTED:", pkgs, "download stats not found or currently not available..."))

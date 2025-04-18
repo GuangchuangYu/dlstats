@@ -4,15 +4,16 @@
 \alias{bioc_stats}
 \title{bioc_stats}
 \usage{
-bioc_stats(packages, use_cache = TRUE, type = "Software")
+bioc_stats(packages, use_cache = TRUE, type = "Software", progress = TRUE)
 }
 \arguments{
 \item{packages}{packages}
 
-\item{use_cache}{logical, should cached data be used? Default: TRUE. If set to FALSE, it will
-re-query download stats and update cache.}
+\item{use_cache}{logical, should cached data be used? Default: TRUE. If set to FALSE, it will re-query download stats and update cache.}
 
 \item{type}{one of "Software", "AnnotationData", "ExperimentData", and "Workflow"}
+
+\item{progress}{logical, should a progress bar be shown? Default: TRUE. When TRUE, prints a the current package name and a text progress bar.}
 }
 \value{
 data.frame
@@ -24,7 +25,7 @@ monthly download stats of Bioconductor package(s)
 \dontrun{
 library("dlstats")
 pkgs <- c("ChIPseeker", "clusterProfiler", "DOSE", "ggtree", "GOSemSim", "ReactomePA")
-y <- bioc_stats(pkgs, use_cache=TRUE)
+y <- bioc_stats(pkgs, use_cache=TRUE, progress=TRUE)
 head(y)
 }
 }

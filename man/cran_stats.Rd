@@ -2,29 +2,20 @@
 % Please edit documentation in R/cran_stats.R
 \name{cran_stats}
 \alias{cran_stats}
-\title{cran_stats}
+\title{Get monthly download stats of CRAN package(s)}
 \usage{
-cran_stats(packages, use_cache = TRUE)
+cran_stats(packages, use_cache = TRUE, progress = TRUE)
 }
 \arguments{
 \item{packages}{packages}
 
-\item{use_cache}{logical, should cached data be used? Default: TRUE. If set to FALSE, it will
-re-query download stats and update cache.}
+\item{use_cache}{logical, should cached data be used? Default: TRUE. If set to FALSE, it will re-query download stats and update cache.}
+
+\item{progress}{logical, should a progress bar be shown? Default: TRUE. When TRUE, a text progress bar will display “fetching data for `year-month`” as each month’s range is fetched.}
 }
 \value{
 data.frame
 }
 \description{
-monthly download stats of cran package(s)
-}
-\examples{
-\dontrun{
-library("dlstats")
-x <- cran_stats(c("dlstats", "emojifont", "rvcheck"), use_cache=TRUE)
-head(x)
-}
-}
-\author{
-Guangchuang Yu
+Get monthly download stats of CRAN package(s), up to 500 packages at a time.
 }
