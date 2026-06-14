@@ -14,7 +14,7 @@ YGC_bioc_pkg <- c("ChIPseeker", "clusterProfiler", "DOSE",
 ##' @return ggplot object
 ##' @importFrom RColorBrewer brewer.pal
 ##' @importFrom ggplot2 ggplot
-##' @importFrom ggplot2 aes_string
+##' @importFrom ggplot2 aes
 ##' @importFrom ggplot2 geom_line
 ##' @importFrom ggplot2 geom_point
 ##' @importFrom ggplot2 scale_color_manual
@@ -46,7 +46,7 @@ plot_bioc_stats <- function(pkg=YGC_bioc_pkg) {
         rank[i] = j # paste0("rank: ", j, '/', n)
     }
 
-    cols <- brewer.pal(length(pkg), 'Set1')
+    cols <- colorRampPalette(brewer.pal(9, 'Set1'))(length(pkg))
 
     p <- plot_dlstats_internal(nb, "Nb_of_distinct_IPs")
 
@@ -56,7 +56,7 @@ plot_bioc_stats <- function(pkg=YGC_bioc_pkg) {
                                 name=paste("Download rank in", n, "Bioconductor packages"),
                                 values=cols)
 
-    p <- p + labs(captions=paste0("Downloads by distinct IPs: ",
+    p <- p + labs(caption=paste0("Downloads by distinct IPs: ",
                                   scales::comma(sum(nb$Nb_of_distinct_IPs)), "/total, ",
                                   "access date: ", format(Sys.time(), "%b %Y")),
                   title="Monthly download stats")
@@ -64,8 +64,8 @@ plot_bioc_stats <- function(pkg=YGC_bioc_pkg) {
 }
 
 plot_dlstats_internal <- function(nb, y) {
-    ggplot(nb, aes_string(x="end", y=y,
-                          group="package", color="package")) +
+    ggplot(nb, aes(x=.data[["end"]], y=.data[[y]],
+                          group=.data[["package"]], color=.data[["package"]])) +
         geom_line() + geom_point() + theme_minimal() +
         xlab(NULL) + ylab(NULL) + theme(legend.position=c(.3, .6))
 }
@@ -90,9 +90,9 @@ plot_cran_stats <- function(pkg=YGC_cran_pkg) {
         return(NULL)
     }
     p <- plot_dlstats_internal(nb, "downloads")
-    p + labs(captions=paste0("access date: ", format(Sys.time(), "%b %Y")),
+    p + labs(caption=paste0("access date: ", format(Sys.time(), "%b %Y")),
              title="Monthly download stats") +
-        scale_color_manual(values=brewer.pal(length(pkg), 'Dark2'), name="") +
+        scale_color_manual(values=colorRampPalette(brewer.pal(8, 'Dark2'))(length(pkg)), name="") +
         theme(legend.position=c(.1, .7))
 }
 
