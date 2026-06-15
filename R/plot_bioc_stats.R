@@ -12,6 +12,7 @@ YGC_bioc_pkg <- c("ChIPseeker", "clusterProfiler", "DOSE",
 ##' @title plot_bioc_stats
 ##' @param pkg packages
 ##' @return ggplot object
+##' @importFrom grDevices colorRampPalette
 ##' @importFrom RColorBrewer brewer.pal
 ##' @importFrom ggplot2 ggplot
 ##' @importFrom ggplot2 aes

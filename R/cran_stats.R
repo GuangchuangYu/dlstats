@@ -9,6 +9,7 @@
 #' @return data.frame
 #' @importFrom jsonlite fromJSON
 #' @importFrom magrittr %>%
+#' @importFrom utils setTxtProgressBar txtProgressBar
 #' @export
 cran_stats <- function(packages, use_cache=TRUE, progress=TRUE) {
     if (length(packages) > 500) {
@@ -182,4 +183,4 @@ parseJSON <- function(x) {
 }
 
 
-globalVariables(".")
+utils::globalVariables(c(".", ".data"))

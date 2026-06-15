@@ -7,6 +7,7 @@
 ##' @param use_cache logical, should cached data be used? Default: TRUE. If set to FALSE, it will re-query download stats and update cache.
 ##' @param progress logical, should a progress bar be shown? Default: TRUE. When TRUE, prints a the current package name and a text progress bar.
 ##' @return data.frame
+##' @importFrom utils flush.console setTxtProgressBar txtProgressBar
 ##' @export
 ##' @examples
 ##' \dontrun{

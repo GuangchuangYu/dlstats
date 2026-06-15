@@ -4,3 +4,5 @@ Makefile
 ^.*\.DS_Store
 ^docs$
 README.md
+^CRAN-SUBMISSION$
+
